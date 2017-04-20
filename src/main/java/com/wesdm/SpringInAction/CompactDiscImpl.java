@@ -19,4 +19,8 @@ public class CompactDiscImpl implements CompactDisc{
 		
 	}
 
+	public void playTrack(int track) {
+		
+	}
+
 }

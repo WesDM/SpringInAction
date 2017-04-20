@@ -1,0 +1,27 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd ">
+
+	<aop:aspectj-autoproxy />
+
+	<!-- Aspect -->
+	<bean id="audience" class="com.wesdm.SpringInAction.Audience" />
+
+	<aop:config>
+		<aop:aspect ref="audience">
+			<aop:pointcut id="performance"
+				expression="execution(** com.wesdm.SpringInAction.aspects.Performance.perform(..))" />
+
+			<aop:before pointcut-ref="performance" method="silenceCellPhones" />
+			<aop:before pointcut-ref="performance" method="takeSeats" />
+			<aop:after-returning pointcut-ref="performance"
+				method="applause" />
+			<aop:after-throwing pointcut-ref="performance"
+				method="demandRefund" />
+		</aop:aspect>
+	</aop:config>
+
+</beans>
